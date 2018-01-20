@@ -1,0 +1,22 @@
+dist: trusty
+sudo: false
+language: node_js
+
+node_js:
+  - "node"
+  - "8"
+  - "7"
+
+notifications:
+  email:
+    on_failure: always
+
+branches:
+  only:
+    - master
+
+install:
+  - npm install
+
+script:
+  - npm test -- test/**/*.test.js

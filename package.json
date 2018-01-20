@@ -1,0 +1,43 @@
+{
+  "name": "dbfixtures",
+  "version": "1.0.0",
+  "description": "A NodeJS equivalent to DbUnit.",
+  "keywords": ["db fixtures", "test fixtures", "fixtures"],
+  "homepage": "https://github.com/PedroHenriques/dbfixtures",
+  "bugs": "https://github.com/PedroHenriques/dbfixtures/issues",
+  "author": "Pedro Henriques <pedro@pedrojhenriques.com> (http://pedrojhenriques.com)",
+  "main": "lib/index.js",
+  "types": "lib/index.d.js",
+  "directories": {
+    "lib": "lib/",
+    "test": "test/"
+  },
+  "scripts": {
+    "prestart": "npm run build && npm run lint",
+    "start": "node lib/index.js",
+    "run": "node lib/index.js",
+    "pretest": "npm run build",
+    "test": "mocha",
+    "mocha": "mocha",
+    "build": "tsc",
+    "dev": "node ./node_modules/ts-node/dist/bin.js src/index.ts",
+    "lint": "tslint -c ./tslint.json -p ./tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:PedroHenriques/dbfixtures.git"
+  },
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@types/node": "^9.3.0",
+    "chai": "^4.1.2",
+    "mocha": "^4.1.0",
+    "proxyquire": "^1.8.0",
+    "sinon": "^4.1.6",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.9.1",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "^2.6.2"
+  }
+}

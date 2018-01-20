@@ -1,0 +1,4 @@
+--check-leaks
+--full-trace
+-R dot
+--timeout 30000

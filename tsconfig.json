@@ -1,0 +1,25 @@
+{
+	"compileOnSave": false,
+
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "es6",
+		"lib": ["esnext"],
+		"outDir" : "lib",
+		"alwaysStrict" : true,
+		"noEmitOnError" : true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noFallthroughCasesInSwitch" : true,
+		"strictNullChecks": true,
+		"sourceMap": true,
+		"declaration": true,
+		"declarationDir": "lib",
+		"watch": false
+	},
+
+	"include" : ["src/**/*.ts"],
+
+	"exclude": ["node_modules"]
+}
