@@ -1,8 +1,12 @@
 {
   "name": "dbfixtures",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A NodeJS equivalent to DbUnit.",
-  "keywords": ["db fixtures", "test fixtures", "fixtures"],
+  "keywords": [
+    "db fixtures",
+    "test fixtures",
+    "fixtures"
+  ],
   "homepage": "https://github.com/PedroHenriques/dbfixtures",
   "bugs": "https://github.com/PedroHenriques/dbfixtures/issues",
   "author": "Pedro Henriques <pedro@pedrojhenriques.com> (http://pedrojhenriques.com)",
@@ -30,14 +34,14 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-    "@types/node": "^9.3.0",
+    "@types/node": "^8.9.1",
     "chai": "^4.1.2",
-    "mocha": "^4.1.0",
+    "mocha": "^5.0.0",
     "proxyquire": "^1.8.0",
-    "sinon": "^4.1.6",
+    "sinon": "^4.2.2",
     "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
     "tslint-eslint-rules": "^4.1.1",
-    "typescript": "^2.6.2"
+    "typescript": "^2.7.1"
   }
 }
