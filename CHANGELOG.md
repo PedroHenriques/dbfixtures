@@ -7,7 +7,7 @@
 - Cleaned up the NPM scripts
 - Updated all NPM devDependencies to latests versions
 - Improved the `README.md` file with mentions to the now available `MongoDB` driver and other overall text improvements
-- Updated `travis ci` configuration file to include latests versions of NodeJS
+- Updated `travis ci` configuration file to include only versions of NodeJS >= 10, due to the use of Promise's `finally()` method
 
 ### Removed
 - NPM not needed devDependencies: `@types/node` and `ts-node`
