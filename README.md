@@ -7,19 +7,21 @@ An abstraction layer for handling database fixtures for automated testing purpos
 ## Installation
 
 ```sh
-npm install dbfixtures
+npm install --save-dev dbfixtures
 ```
 
 ## Features
 
 * Test runner agnostic
+* No dependencies
+* Written in TypeScript
 * Standardized interface across multiple database systems
 * Easily set your database for each test's needs
 
 ## Drivers
 
 This package will use drivers to handle the database operations.
-Each driver will be dedicated to 1 databse system (ex: mysql).
+Each driver will be dedicated to 1 databse system (ex: MySQL, MongoDb).  
 You can set as many drivers as needed and the fixtures will be sent to each one.
 
 ### Driver interface
@@ -27,10 +29,10 @@ You can set as many drivers as needed and the fixtures will be sent to each one.
 The drivers are expected to use the following interface
 
 ```js
-// truncates the tables with the supplied names, ignoring foreign key constraints
+// clears the specified "tables" from any content
 truncate: (tableNames: string[]) => Promise<void>
 
-// inserts the supplied rows into the specified table, respecting foreign key constraints
+// inserts the supplied "rows" into the specified "table"
 insertFixtures: (tableName: string, fixtures: [{}]) => Promise<void>
 
 // terminates the connection to the database
@@ -41,19 +43,21 @@ close: () => Promise<void>
 
 * [MySQL](https://github.com/PedroHenriques/dbfixtures-mysql-driver)
 
+* [MongoDB](https://github.com/PedroHenriques/dbfixtures-mongodb-driver)
+
 ## Usage
 
 This package exposes 2 functions
 
 * `setDrivers(...newDrivers: IDriver[]): void`: call this function with the array of driver instances to be used when fixtures are inserted.
 
-* `insertFixtures(fixtures: IFixtures): Promise<void>`: call this function with the fixtures to be sent to each registered driver.
+* `insertFixtures(fixtures: IFixtures): Promise<void>`: call this function with the fixtures to be sent to each registered driver.  
 **Note:** the fixtures will be inserted in the order they are provided.
 
 The `IDriver` interface is described in the section **Driver interface** above.
 
-The `IFixtures` interface is an object with strings as keys and arrays as values.
-The keys are table names and for each one provide an array of objects, each representing a row to be inserted.
+The `IFixtures` interface is an object with strings as keys and arrays as values.  
+The keys are "table" names and for each one provide an array of objects, each representing a "row" to be inserted.
 
 ### Example
 
@@ -101,12 +105,17 @@ describe('fixtures example', function () {
 ## How It Works
 
 Each registered driver will be called to:
-* truncate the tables that will be used in the current fixture insertion operation, ignoring foreign key constraints.
-* insert the fixtures in the order they were provided, respecting foreign key constraints.
+
+* clear the "tables" that will be used in the current fixture insertion operation from any content.
+
+* insert the fixtures in the order they were provided.
+
 * terminate the connection to their database.
 
 ## Testing This Package
 
 * `cd` into the package's directory
 * run `npm install`
-* for unit tests run `npm test -- test\unit\**\*.test.js`
+* run `npm run build`
+
+* for unit tests run `npm test -- test/unit/`

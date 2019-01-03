@@ -15,11 +15,10 @@
 		"strictNullChecks": true,
 		"sourceMap": true,
 		"declaration": true,
-		"declarationDir": "lib",
 		"watch": false
 	},
 
-	"include" : ["src/**/*.ts"],
+	"include" : ["./**/*.ts"],
 
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules", "lib"]
 }

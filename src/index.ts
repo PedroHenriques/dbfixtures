@@ -1,3 +1,3 @@
 'use strict';
 
-export * from './DbFixtures';
+export * from './dbFixtures';
