@@ -33,7 +33,7 @@ The drivers are expected to use the following interface
 truncate: (tableNames: string[]) => Promise<void>
 
 // inserts the supplied "rows" into the specified "table"
-insertFixtures: (tableName: string, fixtures: [{}]) => Promise<void>
+insertFixtures: (tableName: string, fixtures: {}[]) => Promise<void>
 
 // terminates the connection to the database
 close: () => Promise<void>
