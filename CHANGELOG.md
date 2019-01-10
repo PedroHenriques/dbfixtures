@@ -1,9 +1,5 @@
 # Changelog
 
-## [1.1.1] - 2019-01-10
-### Fixed
-- Incorrect minimum version of NodeJS supported, which is `>=8` and not `>=10`, in the package.json file's `engines` property
-
 ## [1.1.0] - 2019-01-03
 ### Changed
 - Refactored the `insertFixtures()` function to improve performance when handling multiple drivers at the same time
