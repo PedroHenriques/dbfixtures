@@ -18,6 +18,13 @@ npm install --save-dev dbfixtures
 * Standardized interface across multiple database systems
 * Easily set your database for each test's needs
 
+## NodeJS versions
+
+- **Package version `>=1.1.*`** supports NodeJS `v8` or higher.  
+  **NOTE:** For versions `8` and `9` the node flag `--harmony_promise_finally` is required
+
+- **Package version `1.0.*`** supports NodeJS `v7` or higher.  
+
 ## Drivers
 
 This package will use drivers to handle the database operations.

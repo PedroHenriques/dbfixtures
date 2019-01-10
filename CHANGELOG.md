@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1] - 2019-01-10
+### Added
+- Information about supported NodeJS versions to the `README.md` file
+
+### Fixed
+- Incorrect minimal supported NodeJS version, which is `8` and not `10`, provided the `--harmony_promise_finally` flag is used when running node
+
 ## [1.1.0] - 2019-01-03
 ### Changed
 - Refactored the `insertFixtures()` function to improve performance when handling multiple drivers at the same time
