@@ -20,6 +20,8 @@ npm install --save-dev dbfixtures
 
 ## NodeJS versions
 
+- **Package version `>=2.*`** supports NodeJS `v8` or higher.  
+
 - **Package version `>=1.1.*`** supports NodeJS `v8` or higher.  
   **NOTE:** For versions `8` and `9` the node flag `--harmony_promise_finally` is required
 
@@ -54,12 +56,14 @@ close: () => Promise<void>
 
 ## Usage
 
-This package exposes 2 functions
+This package exposes 3 functions
 
 * `setDrivers(...newDrivers: IDriver[]): void`: call this function with the array of driver instances to be used when fixtures are inserted.
 
 * `insertFixtures(fixtures: IFixtures): Promise<void>`: call this function with the fixtures to be sent to each registered driver.  
 **Note:** the fixtures will be inserted in the order they are provided.
+
+* `closeDrivers(): Promise<void>`: call this function to run any necessary cleanup operations on all registered drivers (ex: close DB connections).
 
 The `IDriver` interface is described in the section **Driver interface** above.
 
@@ -97,6 +101,10 @@ describe('fixtures example', function () {
   before(async function () {
     const mysqlDriver = await fixturesMysqlDriver.create(mysqlConnectionInfo);
     dbfixtures.setDrivers(mysqlDriver);
+  });
+
+  after(async function () {
+    await dbfixtures.closeDrivers();
   });
 
   beforeEach(async function () {

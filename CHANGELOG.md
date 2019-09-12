@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0] - 2019-09-12
+### Added
+- The `closeDrivers` exported function, which will call each registered driver's `close` function
+
+### Changed
+- insertFixtures() no longer calls each registered driver's close(), removing the need to register the drivers before each test
+- Updated NPM devDependencies to latest versions
+
+### Removed
+- Deprecated linter option
+
 ## [1.1.1] - 2019-01-10
 ### Added
 - Information about supported NodeJS versions to the `README.md` file

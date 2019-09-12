@@ -15,21 +15,24 @@ export function setDrivers(...newDrivers: IDriver[]): void {
  */
 export async function insertFixtures(fixtures: IFixtures): Promise<void> {
   const tableNames = Object.getOwnPropertyNames(fixtures);
-  const driverPromises: Promise<void>[] = [];
 
-  drivers.forEach((driver): void => {
-    driverPromises.push(
+  await Promise.all(
+    drivers.map(driver =>
       driver.truncate(tableNames)
       .then(async (): Promise<void> => {
         for (let i = 0; i < tableNames.length; i++) {
           await driver.insertFixtures(tableNames[i], fixtures[tableNames[i]]);
         }
       })
-      .finally((): Promise<void> => {
-        return driver.close();
-      })
-    );
-  });
+    )
+  );
+}
 
-  await Promise.all(driverPromises);
+/**
+ * Runs closing cleanup steps for each registered driver.
+ */
+export async function closeDrivers(): Promise<void> {
+  await Promise.all(
+    drivers.map(driver => driver.close())
+  );
 }

@@ -120,20 +120,11 @@ describe('DbFixtures', function () {
           });
         });
 
-        it('should call the driver\'s close() property once', function () {
+        it('should not call the driver\'s close() property', function () {
           return(
             dbFixtures.insertFixtures({ otherKey: [ {}, {} ] })
             .then(function () {
-              assert.isTrue(doubles.driverOneStub.close.calledOnce);
-            })
-          );
-        });
-        
-        it('should call the driver\'s close() property with no arguments', function () {
-          return(
-            dbFixtures.insertFixtures({ otherKey: [ {}, {} ] })
-            .then(function () {
-              assert.strictEqual(doubles.driverOneStub.close.args[0].length, 0);
+              assert.isTrue(doubles.driverOneStub.close.notCalled);
             })
           );
         });
@@ -217,20 +208,11 @@ describe('DbFixtures', function () {
           });
         });
 
-        it('should call the driver\'s close() property once', function () {
+        it('should not call the driver\'s close() property', function () {
           return(
             dbFixtures.insertFixtures({ key: [], otherKey: [ {}, {} ] })
             .then(function () {
-              assert.isTrue(doubles.driverOneStub.close.calledOnce);
-            })
-          );
-        });
-        
-        it('should call the driver\'s close() property with no arguments', function () {
-          return(
-            dbFixtures.insertFixtures({ key: [], otherKey: [ {}, {} ] })
-            .then(function () {
-              assert.strictEqual(doubles.driverOneStub.close.args[0].length, 0);
+              assert.isTrue(doubles.driverOneStub.close.notCalled);
             })
           );
         });
@@ -246,39 +228,6 @@ describe('DbFixtures', function () {
               })
               .catch(function (error) {
                 assert.strictEqual(error, testError);
-              })
-            );
-          });
-          
-          it('should still call the driver\'s close() property once', function () {
-            const testError = new Error('first call error message');
-            doubles.driverOneStub.insertFixtures.onCall(0).returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ key: [ {}, {} ], otherKey: [ {} ] })
-              .catch(function (error) {
-                assert.isTrue(doubles.driverOneStub.close.calledOnce);
-              })
-            );
-          });
-          
-          it('should still call the driver\'s close() property with no arguments', function () {
-            const testError = new Error('first call error message');
-            doubles.driverOneStub.insertFixtures.onCall(0).returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ key: [ {}, {} ], otherKey: [ {} ] })
-              .catch(function (error) {
-                assert.strictEqual(doubles.driverOneStub.close.args[0].length, 0);
-              })
-            );
-          });
-          
-          it('should not call the driver\'s inertFixtures() property a second time', function () {
-            const testError = new Error('first call error message');
-            doubles.driverOneStub.insertFixtures.onCall(0).returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ key: [ {}, {} ], otherKey: [ {} ] })
-              .catch(function (error) {
-                assert.strictEqual(doubles.driverOneStub.insertFixtures.callCount, 1);
               })
             );
           });
@@ -309,28 +258,6 @@ describe('DbFixtures', function () {
           );
         });
         
-        it('should still call the driver\'s close() property once', function () {
-          const testError = new Error('test error message');
-          doubles.driverOneStub.truncate.returns(Promise.reject(testError));
-          return(
-            dbFixtures.insertFixtures({ key: [] })
-            .catch(function () {
-              assert.isTrue(doubles.driverOneStub.close.calledOnce);
-            })
-          );
-        });
-        
-        it('should still call the driver\'s close() property with no arguments', function () {
-          const testError = new Error('test error message');
-          doubles.driverOneStub.truncate.returns(Promise.reject(testError));
-          return(
-            dbFixtures.insertFixtures({ key: [] })
-            .catch(function () {
-              assert.strictEqual(doubles.driverOneStub.close.args[0].length, 0);
-            })
-          );
-        });
-        
         it('should not call the driver\'s insertFixtures() property', function () {
           const testError = new Error('test error message');
           doubles.driverOneStub.truncate.returns(Promise.reject(testError));
@@ -349,22 +276,6 @@ describe('DbFixtures', function () {
           doubles.driverOneStub.insertFixtures.onCall(0).returns(Promise.reject(testError));
           return(
             dbFixtures.insertFixtures({ otherKey: [ {}, {} ] })
-            .then(function () {
-              assert.fail();
-            })
-            .catch(function (error) {
-              assert.strictEqual(error, testError);
-            })
-          );
-        });
-      });
-
-      describe('if the call to the driver\'s close() property returns a promise that rejects', function () {
-        it('should return a promise that rejects with that Error object', function () {
-          const testError = new Error('close error message');
-          doubles.driverOneStub.close.returns(Promise.reject(testError));
-          return(
-            dbFixtures.insertFixtures({ key: [], otherKey: [ {}, {} ] })
             .then(function () {
               assert.fail();
             })
@@ -538,20 +449,11 @@ describe('DbFixtures', function () {
           });
         });
 
-        it('should call the close() property once', function () {
+        it('should not call the close() property', function () {
           return(
             dbFixtures.insertFixtures({ prop: [ {} ] })
             .then(function () {
-              assert.isTrue(doubles.driverOneStub.close.calledOnce);
-            })
-          );
-        });
-        
-        it('should call the close() property with no argument', function () {
-          return(
-            dbFixtures.insertFixtures({ prop: [ {} ], otherProp: [ {}, {}, {}] })
-            .then(function () {
-              assert.strictEqual(doubles.driverOneStub.close.args[0].length, 0);
+              assert.isTrue(doubles.driverOneStub.close.notCalled);
             })
           );
         });
@@ -571,28 +473,6 @@ describe('DbFixtures', function () {
             );
           });
           
-          it('should still call the close() property once', function () {
-            const testError = new Error('test error message');
-            doubles.driverOneStub.truncate.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .catch(function () {
-                assert.isTrue(doubles.driverOneStub.close.calledOnce);
-              })
-            );
-          });
-          
-          it('should not call the insertFixtures() property', function () {
-            const testError = new Error('test error message');
-            doubles.driverOneStub.truncate.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .catch(function () {
-                assert.isTrue(doubles.driverOneStub.insertFixtures.notCalled);
-              })
-            );
-          });
-          
           it('should still call the 2nd driver\'s truncate() property once', function () {
             const testError = new Error('test error message');
             doubles.driverOneStub.truncate.returns(Promise.reject(testError));
@@ -611,17 +491,6 @@ describe('DbFixtures', function () {
               dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
               .catch(function () {
                 assert.strictEqual(doubles.driverTwoStub.insertFixtures.callCount, 2);
-              })
-            );
-          });
-          
-          it('should still call the 2nd driver\'s close() property once', function () {
-            const testError = new Error('test error message');
-            doubles.driverOneStub.truncate.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .catch(function () {
-                assert.isTrue(doubles.driverTwoStub.close.calledOnce);
               })
             );
           });
@@ -638,88 +507,6 @@ describe('DbFixtures', function () {
               })
               .catch(function (error) {
                 assert.strictEqual(error, testError);
-              })
-            );
-          });
-
-          it('should still call the close() property once', function () {
-            const testError = new Error('driver 1 insertFixtures() error message');
-            doubles.driverOneStub.insertFixtures.onCall(0).returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ key: [] })
-              .catch(function () {
-                assert.isTrue(doubles.driverOneStub.close.calledOnce);
-              })
-            );
-          });
-
-          it('should still call the 2nd driver\'s insertFixtures() property at least once', function () {
-            const testError = new Error('driver 1 insertFixtures() error message');
-            doubles.driverOneStub.insertFixtures.onCall(0).returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ key: [] })
-              .catch(function () {
-                assert.isTrue(doubles.driverTwoStub.insertFixtures.called);
-              })
-            );
-          });
-
-          it('should still call the 2nd driver\'s close() property once', function () {
-            const testError = new Error('driver 1 insertFixtures() error message');
-            doubles.driverOneStub.insertFixtures.onCall(0).returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ key: [] })
-              .catch(function () {
-                assert.isTrue(doubles.driverTwoStub.close.calledOnce);
-              })
-            );
-          });
-        });
-
-        describe('if the call to the close() property returns a promise that rejects', function () {
-          it('should return a promise that rejects with that Error object', function () {
-            const testError = new Error('diver 1 close() error message');
-            doubles.driverOneStub.close.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .then(function () {
-                assert.fail();
-              })
-              .catch(function (error) {
-                assert.strictEqual(error, testError);
-              })
-            );
-          });
-          
-          it('should still call the 2nd driver\'s truncate() property once', function () {
-            const testError = new Error('diver 1 close() error message');
-            doubles.driverOneStub.close.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .catch(function () {
-                assert.isTrue(doubles.driverTwoStub.truncate.calledOnce);
-              })
-            );
-          });
-          
-          it('should still call the 2nd driver\'s insertFixtures() property 2 times', function () {
-            const testError = new Error('diver 1 close() error message');
-            doubles.driverOneStub.close.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .catch(function () {
-                assert.strictEqual(doubles.driverTwoStub.insertFixtures.callCount, 2);
-              })
-            );
-          });
-          
-          it('should still call the 2nd driver\'s close() property once', function () {
-            const testError = new Error('diver 1 close() error message');
-            doubles.driverOneStub.close.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .catch(function () {
-                assert.isTrue(doubles.driverTwoStub.close.calledOnce);
               })
             );
           });
@@ -881,20 +668,11 @@ describe('DbFixtures', function () {
           });
         });
 
-        it('should call the close() property once', function () {
+        it('should not call the close() property', function () {
           return(
             dbFixtures.insertFixtures({ prop: [ {} ] })
             .then(function () {
-              assert.isTrue(doubles.driverTwoStub.close.calledOnce);
-            })
-          );
-        });
-        
-        it('should call the close() property with no arguments', function () {
-          return(
-            dbFixtures.insertFixtures({ prop: [ {} ], key: [ {}, {}, {}, {} ] })
-            .then(function () {
-              assert.strictEqual(doubles.driverTwoStub.close.args[0].length, 0);
+              assert.isTrue(doubles.driverTwoStub.close.notCalled);
             })
           );
         });
@@ -910,17 +688,6 @@ describe('DbFixtures', function () {
               })
               .catch(function (error) {
                 assert.strictEqual(error, testError);
-              })
-            );
-          });
-          
-          it('should still call the close() property once', function () {
-            const testError = new Error('test error message');
-            doubles.driverTwoStub.truncate.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .catch(function () {
-                assert.isTrue(doubles.driverTwoStub.close.calledOnce);
               })
             );
           });
@@ -957,17 +724,6 @@ describe('DbFixtures', function () {
               })
             );
           });
-          
-          it('should still call the 1st driver\'s close() property once', function () {
-            const testError = new Error('test error message');
-            doubles.driverTwoStub.truncate.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .catch(function () {
-                assert.isTrue(doubles.driverOneStub.close.calledOnce);
-              })
-            );
-          });
         });
 
         describe('if the call to the insertFixtures() property returns a promise that rejects', function () {
@@ -985,17 +741,6 @@ describe('DbFixtures', function () {
             );
           });
 
-          it('should still call the close() once', function () {
-            const testError = new Error('driver 2 insertFixtures() error message');
-            doubles.driverTwoStub.insertFixtures.onCall(0).returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ key: [] })
-              .catch(function () {
-                assert.isTrue(doubles.driverTwoStub.close.calledOnce);
-              })
-            );
-          });
-
           it('should still call the 1st driver\'s insertFixtures() once', function () {
             const testError = new Error('driver 2 insertFixtures() error message');
             doubles.driverTwoStub.insertFixtures.onCall(0).returns(Promise.reject(testError));
@@ -1003,66 +748,6 @@ describe('DbFixtures', function () {
               dbFixtures.insertFixtures({ key: [] })
               .catch(function () {
                 assert.isTrue(doubles.driverOneStub.insertFixtures.calledOnce);
-              })
-            );
-          });
-
-          it('should still call the 1st driver\'s close() once', function () {
-            const testError = new Error('driver 2 insertFixtures() error message');
-            doubles.driverTwoStub.insertFixtures.onCall(0).returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ key: [] })
-              .catch(function () {
-                assert.isTrue(doubles.driverOneStub.close.calledOnce);
-              })
-            );
-          });
-        });
-
-        describe('if the call to the close() property returns a promise that rejects', function () {
-          it('should return a promise that rejects with that Error object', function () {
-            const testError = new Error('diver 2 close() error message');
-            doubles.driverTwoStub.close.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .then(function () {
-                assert.fail();
-              })
-              .catch(function (error) {
-                assert.strictEqual(error, testError);
-              })
-            );
-          });
-          
-          it('should still call the 1st driver\'s truncate() property once', function () {
-            const testError = new Error('diver 1 close() error message');
-            doubles.driverTwoStub.close.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .catch(function () {
-                assert.isTrue(doubles.driverOneStub.truncate.calledOnce);
-              })
-            );
-          });
-          
-          it('should still call the 1st driver\'s insertFixtures() property 2 times', function () {
-            const testError = new Error('diver 1 close() error message');
-            doubles.driverTwoStub.close.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .catch(function () {
-                assert.strictEqual(doubles.driverOneStub.insertFixtures.callCount, 2);
-              })
-            );
-          });
-          
-          it('should still call the 1st driver\'s close() property once', function () {
-            const testError = new Error('diver 1 close() error message');
-            doubles.driverTwoStub.close.returns(Promise.reject(testError));
-            return(
-              dbFixtures.insertFixtures({ otherKey: [ {} ], index: [ {}, {} ] })
-              .catch(function () {
-                assert.isTrue(doubles.driverOneStub.close.calledOnce);
               })
             );
           });
@@ -1076,6 +761,146 @@ describe('DbFixtures', function () {
             assert.isUndefined(result);
           })
         );
+      });
+    });
+  });
+
+  describe('closeDrivers()', function () {
+    describe('if 1 driver is set', function () {
+      beforeEach(function () {
+        doubles.driverOneStub.close.returns(Promise.resolve());
+        
+        dbFixtures.setDrivers(doubles.driverOneStub);
+      });
+
+      it('should call the driver\'s close() once', function () {
+        dbFixtures.closeDrivers();
+        assert.strictEqual(doubles.driverOneStub.close.callCount, 1);
+      });
+
+      it('should return a promise that resolves with void', function () {
+        return(
+          dbFixtures.closeDrivers()
+          .then(function (res) {
+            assert.isUndefined(res);
+          })
+        );
+      });
+
+      describe('if the call to the driver\'s close() returns a promise that rejects', function () {
+        it('should return a promise that rejects with that Error object', function () {
+          const testError = new Error('close error message');
+          doubles.driverOneStub.close.returns(Promise.reject(testError));
+          return(
+            dbFixtures.closeDrivers()
+            .then(function () {
+              assert.fail();
+            })
+            .catch(function (error) {
+              assert.strictEqual(error, testError);
+            })
+          );
+        });
+      });
+    });
+
+    describe('if 2 drivers are set', function () {
+      beforeEach(function () {
+        doubles.driverOneStub.close.returns(Promise.resolve());
+        doubles.driverTwoStub.close.returns(Promise.resolve());
+        
+        dbFixtures.setDrivers(doubles.driverOneStub, doubles.driverTwoStub);
+      });
+
+      it('should call the 1st driver\'s close() once', function () {
+        return(
+          dbFixtures.closeDrivers()
+          .then(function () {
+            assert.strictEqual(doubles.driverOneStub.close.callCount, 1);
+          })
+        );
+      });
+      
+      it('should call the 2nd driver\'s close() once', function () {
+        return(
+          dbFixtures.closeDrivers()
+          .then(function () {
+            assert.strictEqual(doubles.driverTwoStub.close.callCount, 1);
+          })
+        );
+      });
+
+      it('should return a promise that resolves with void', function () {
+        return(
+          dbFixtures.closeDrivers()
+          .then(function (res) {
+            assert.isUndefined(res);
+          })
+        );
+      });
+
+      describe('if the call to the 1st driver\'s close() returns a promise that rejects', function () {
+        let testError;
+        beforeEach(function () {
+          testError = new Error('close error message');
+          doubles.driverOneStub.close.returns(Promise.reject(testError));
+        });
+
+        it('should return a promise that rejects with that Error object', function () {
+          return(
+            dbFixtures.closeDrivers()
+            .then(function () {
+              assert.fail();
+            })
+            .catch(function (error) {
+              assert.strictEqual(error, testError);
+            })
+          );
+        });
+
+        it('should still call the 2nd driver\'s close() once', function () {
+          return(
+            dbFixtures.closeDrivers()
+            .then(function () {
+              assert.fail();
+            })
+            .catch(function () {
+              assert.strictEqual(doubles.driverTwoStub.close.callCount, 1);
+            })
+          );
+        });
+      });
+      
+      describe('if the call to the 2nd driver\'s close() returns a promise that rejects', function () {
+        let testError;
+        beforeEach(function () {
+          testError = new Error('close error message');
+          doubles.driverTwoStub.close.returns(Promise.reject(testError));
+        });
+
+        it('should return a promise that rejects with that Error object', function () {
+          return(
+            dbFixtures.closeDrivers()
+            .then(function () {
+              assert.fail();
+            })
+            .catch(function (error) {
+              assert.strictEqual(error, testError);
+            })
+          );
+        });
+
+        it('should still call the 1st driver\'s close() once', function () {
+          return(
+            dbFixtures.closeDrivers()
+            .then(function () {
+              assert.fail();
+            })
+            .catch(function () {
+              assert.strictEqual(doubles.driverOneStub.close.callCount, 1);
+            })
+          );
+        });
       });
     });
   });
