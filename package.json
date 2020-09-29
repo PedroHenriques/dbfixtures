@@ -1,6 +1,6 @@
 {
   "name": "dbfixtures",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A NodeJS equivalent to DbUnit.",
   "keywords": [
     "db fixtures",
