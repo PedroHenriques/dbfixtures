@@ -20,7 +20,9 @@ npm install --save-dev dbfixtures
 
 ## NodeJS versions
 
-- **Package version `>=2.*`** supports NodeJS `v8` or higher.  
+- **Package version `>=2.1.*`** supports NodeJS `v10` or higher.  
+
+- **Package version `>=2.0.*`** supports NodeJS `v8` or higher.  
 
 - **Package version `>=1.1.*`** supports NodeJS `v8` or higher.  
   **NOTE:** For versions `8` and `9` the node flag `--harmony_promise_finally` is required
@@ -53,6 +55,8 @@ close: () => Promise<void>
 * [MySQL](https://github.com/PedroHenriques/dbfixtures-mysql-driver)
 
 * [MongoDB](https://github.com/PedroHenriques/dbfixtures-mongodb-driver)
+
+* [DynamoDb](https://github.com/PedroHenriques/dbfixtures-dynamodb-driver)
 
 ## Usage
 
