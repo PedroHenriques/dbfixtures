@@ -54,6 +54,8 @@ close: () => Promise<void>
 
 * [MongoDB](https://github.com/PedroHenriques/dbfixtures-mongodb-driver)
 
+* [DynamoDb](https://github.com/PedroHenriques/dbfixtures-dynamodb-driver)
+
 ## Usage
 
 This package exposes 3 functions
